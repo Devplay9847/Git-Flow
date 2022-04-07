@@ -1,3 +1,5 @@
+#!/bin/bash -x
+
 IS_PART_TIME=1;
 IS_FULL_TIME=2;
 MAX_HRS_IN_MONTH=4;
@@ -9,7 +11,6 @@ NUM_WORKING_DAYS=20;
 totalEmpHr=0
 totalWorkingDays=0;
 
-decare -A dailyWage;
 function getWorkHrs(){
 	local empCheck=$1
 	case $empCheck in
@@ -36,9 +37,7 @@ do
 	empCheck=$((RANDOM%3));
 	empHrs="$( getWorkHrs $empCheck )"
 	totalEmpHrs=$(($totalEmpHrs+$empHrs))
-	dailyWage[$totalWorkingDays]="$( getEmpWage $empHrs )"
+	
 done
+echo "Total Employee Hours=" $totalEmpHrs
 
-totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR));
-echo ${dailyWage[@]}
-echo ${!dailyWage[@]}
